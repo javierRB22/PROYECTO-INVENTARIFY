@@ -58,10 +58,10 @@ if(isset($_SESSION['usuario'])){
                 <!-- Formulario de Registro -->
                 <form action="registro_usuario_be.php" method="POST" class="formulario__register">
                     <h2>Regístrarse</h2>
-                    <input type="text" placeholder="Nombre completo" name="nombre_completo">
+                    <input type="text" placeholder="Nombre completo" name="nombre_completo" required>
                     <input type="text" placeholder="Correo Electrónico" name="correo" required>
-                    <input type="text" placeholder="Usuario" name="usuario">
-                    <input type="password" placeholder="Contraseña" name="contraseña">
+                    <input type="text" placeholder="Usuario" name="usuario" required>
+                    <input type="password" placeholder="Contraseña" name="contraseña" required>
                     <button type="submit">Regístrarse</button>
                 </form>
 
