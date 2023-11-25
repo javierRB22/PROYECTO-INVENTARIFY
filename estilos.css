@@ -7,7 +7,7 @@
 }
 
 body{
-  background-color: greenyellow;
+ 
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -173,4 +173,18 @@ main{
   .contenedor__login-register form{
       position: relative;
   }
+}
+
+#video-fondo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  object-fit: cover; /* Ajusta según sea necesario: 'cover', 'contain', 'fill', etc. */
+  width: 100vw; /* Ajusta el ancho según sea necesario */
+  height: 100vh; /* Ajusta la altura según sea necesario */
 }

@@ -27,6 +27,12 @@ if(isset($_SESSION['usuario'])){
 
 <body>
 
+<video autoplay muted loop id="video-fondo">
+        <source src="pexels-google-deepmind-18069236 (Original).mp4" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+    </video>
+
+
     <main>
 
         <div class="contenedor__todo">

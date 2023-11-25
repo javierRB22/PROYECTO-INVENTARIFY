@@ -23,7 +23,16 @@ if (!isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="estilos2.css">
 </head>
 <body>
+
+<video autoplay muted loop id="video-fondo">
+        <source src="pexels-vanessa-loring-5866259 (2160p).mp4" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+    </video>
+
     <h1>Bienvenido a Inventarify</h1>
+
+    
+    
 
     <!-- Formulario para registrar producto -->
     <form class="registro-form" action="procesar_registro_producto.php" method="POST">
@@ -77,6 +86,8 @@ if (!isset($_SESSION['usuario'])) {
     <form action="cerrar_sesion.php" method="post">
         <button type="submit" class="cerrar-sesion-button">Cerrar Sesión</button>
     </form>
+
+
     
 </body>
 </html>

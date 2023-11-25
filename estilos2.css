@@ -9,6 +9,10 @@ body {
     flex-wrap: wrap;
     min-height: 100vh;
     animation: cambioColorFondo 10s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+    background-image: url('C:\xampp\htdocs\2771446G1\PROYECTO\imagen_inventarify.jpg');
+    overflow: hidden;
+    
+ 
 }
 
 @keyframes cambioColorFondo {
@@ -22,8 +26,6 @@ body {
         background: linear-gradient(to right, #3498db, #2ecc71);
     }
 }
-
-
 
 h1 {
     text-align: center;
@@ -107,4 +109,30 @@ a button:hover {
 .cerrar-sesion-button:hover {
     background-color: #c0392b;
 }
+img {
+    width: 100px;
+    height: auto;
+    margin: 10px;
+    position: absolute; /* Añade esta propiedad */
+    top: 0; /* Añade esta propiedad */
+    left: 0; /* Añade esta propiedad */
+}
 
+h1, form, a, button {
+    /* Ajusta los estilos según sea necesario */
+    color: white;
+}
+
+#video-fondo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    object-fit: cover; /* Ajusta según sea necesario: 'cover', 'contain', 'fill', etc. */
+    width: 100vw; /* Ajusta el ancho según sea necesario */
+    height: 100vh; /* Ajusta la altura según sea necesario */
+}
