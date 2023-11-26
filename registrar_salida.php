@@ -31,20 +31,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Calcular el nuevo total
                 $total_nuevo = $total_existente - $cantidad_salida;
 
-                // Actualizar el total en la base de datos
+                // Actualizar el total en la tabla productos
                 $query_actualizar = "UPDATE productos SET total = ? WHERE codigo = ?";
                 $stmt_actualizar = mysqli_prepare($conexion, $query_actualizar);
                 mysqli_stmt_bind_param($stmt_actualizar, "is", $total_nuevo, $codigo);
-                mysqli_stmt_execute($stmt_actualizar);
+                $resultado_actualizar = mysqli_stmt_execute($stmt_actualizar);
 
-                if ($stmt_actualizar) {
-                    echo "<h2>Salida Registrada en la Base de Datos:</h2>";
-                    echo "<p><strong>Código:</strong> $codigo</p>";
-                    echo "<p><strong>Cantidad de Salida:</strong> $cantidad_salida</p>";
-                    echo "<p><strong>Total Actualizado:</strong> $total_nuevo</p>";
+                if ($resultado_actualizar) {
+                    // Verificar si ya existe un registro con el mismo código en salida_cantidad_producto
+                    $query_verificar_existencia = "SELECT * FROM salida_cantidad_producto WHERE codigoProducto = ?";
+                    $stmt_verificar_existencia = mysqli_prepare($conexion, $query_verificar_existencia);
+                    mysqli_stmt_bind_param($stmt_verificar_existencia, "s", $codigo);
+                    mysqli_stmt_execute($stmt_verificar_existencia);
+                    mysqli_stmt_store_result($stmt_verificar_existencia);
 
-                    // Botón para volver a bienvenido.php
-                    echo '<a href="bienvenido.php"><button>Volver a Bienvenido</button></a>';
+                    if (mysqli_stmt_num_rows($stmt_verificar_existencia) > 0) {
+                        // Si ya existe, actualizar la cantidad
+                        $query_actualizar_salida = "UPDATE salida_cantidad_producto SET salidaProducto = salidaProducto + ? WHERE codigoProducto = ?";
+                        $stmt_actualizar_salida = mysqli_prepare($conexion, $query_actualizar_salida);
+                        mysqli_stmt_bind_param($stmt_actualizar_salida, "is", $cantidad_salida, $codigo);
+                        $resultado_actualizar_salida = mysqli_stmt_execute($stmt_actualizar_salida);
+
+                        if (!$resultado_actualizar_salida) {
+                            echo "Error al actualizar la cantidad de salida en salida_cantidad_producto: " . mysqli_error($conexion);
+                        }
+                    } else {
+                        // Si no existe, insertar un nuevo registro
+                        $query_insertar_salida = "INSERT INTO salida_cantidad_producto (codigoProducto, salidaProducto) VALUES (?, ?)";
+                        $stmt_insertar_salida = mysqli_prepare($conexion, $query_insertar_salida);
+
+                        if (!$stmt_insertar_salida) {
+                            die("Error al preparar la consulta de inserción de salida: " . mysqli_error($conexion));
+                        }
+
+                        mysqli_stmt_bind_param($stmt_insertar_salida, "is", $codigo, $cantidad_salida);
+                        $resultado_insertar_salida = mysqli_stmt_execute($stmt_insertar_salida);
+
+                        if (!$resultado_insertar_salida) {
+                            echo "Error al insertar en la tabla salida_cantidad_producto: " . mysqli_error($conexion);
+                        }
+                    }
+
+                    // Mostrar mensaje de éxito con un script JavaScript
+                    echo '<script>alert("Salida Registrada en la Base de Datos."); window.location = "bienvenido.php";</script>';
                 } else {
                     echo "Error al actualizar la cantidad de salida: " . mysqli_error($conexion);
                 }
@@ -58,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error al obtener el total existente: " . mysqli_error($conexion);
     }
 
-    // Cerrar la consulta
+    // Cerrar las consultas
     mysqli_stmt_close($stmt_existente);
     mysqli_close($conexion);
 }
