@@ -36,6 +36,7 @@ if (!isset($_SESSION['usuario'])) {
 
     <!-- Formulario para registrar producto -->
     <form class="registro-form" action="procesar_registro_producto.php" method="POST">
+        <h4>REGISTRO DE PRODUCTO</h4>
         <label for="codigo">Código:</label>
         <input type="text" name="codigo" required class="codigo-input">
 
@@ -52,6 +53,7 @@ if (!isset($_SESSION['usuario'])) {
 
     <!-- Formulario para actualizar cantidad de entrada -->
 <form class="actualizar-form" action="procesar_actualizar_producto.php" method="POST">
+<h4>ACTUALIZAR ENTRADA DE PRODUCTO</h4>
     <label for="codigo_actualizar">Código del Producto a Actualizar:</label>
     <input type="text" name="codigo_actualizar" required>
     <label for="nueva_cantidad">Nueva Cantidad de Entrada:</label>
@@ -62,6 +64,7 @@ if (!isset($_SESSION['usuario'])) {
 
     <!-- Formulario para registrar la salida -->
     <form class="salida-form" action="registrar_salida.php" method="post">
+    <h4>SALIDA DE PRODUCTO</h4>
         <label for="codigo_salida">Código del Producto:</label>
         <input type="text" name="codigo_salida" required class="codigo-salida-input">
 
@@ -73,6 +76,7 @@ if (!isset($_SESSION['usuario'])) {
 
     <!-- Formulario de búsqueda por código -->
     <form class="busqueda-form" action="buscar_producto.php" method="get">
+    <h4>BUSQUEDA DE PRODUCTO</h4>
         <label for="codigo_busqueda">Buscar por Código:</label>
         <input type="text" name="codigo_busqueda" required class="codigo-busqueda-input">
 
